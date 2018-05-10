@@ -15,7 +15,7 @@ angular.module('myApp.view1', ['ngRoute'])
         let ansynAPIS = {};
         $scope.initAnsyn = function (id) {
             if (window && window.Ansyn) {
-                window.fetch('bower_components/config/app.config.json')
+                window.fetch('assets/config/app.config.json')
                     .then(response => response.json())
                     .then(config =>{
 
