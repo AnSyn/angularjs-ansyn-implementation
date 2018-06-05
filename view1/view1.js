@@ -14,19 +14,29 @@ angular.module('myApp.view1', ['ngRoute'])
         let ansynBuilder;
         let ansynAPIS = {};
         $scope.initAnsyn = function (id) {
-            if (window && window.Ansyn) {
-                window.fetch('assets/config/app.config.json')
+            if (Ansyn) {
+                fetch('assets/config/app.config.json')
                     .then(response => response.json())
-                    .then(config =>{
+                    .then(config => {
 
-                        const imports = new Map([
-                            [window.Ansyn.AnsynModulesNames.AnsynRouterModule, null],
-                            [window.Ansyn.AnsynModulesNames.RouterModule, null]
-                        ]);
-                        ansynBuilder = new window.Ansyn(id, config, ((api) => {ansynAPIS[id] = api}), {importsToExclude :[], importsToSet : imports});
+                        const options = {
+                            importsToExclude: [
+                              Ansyn.Modules.AnsynRouterModule,
+                              Ansyn.Modules.RouterModule
+                            ],
+                            providers: [],
+                            customModules: []
+                        };
+
+                        const callback = ((api) => {
+                            ansynAPIS[id] = api
+                        });
+
+                        ansynBuilder = new Ansyn({ id, config, options, callback });
                 })
             }
-        }
+        };
+
         $scope.loadOverlay = function (id) {
             const overlay = {
                 'id': 'newId',
