@@ -18,12 +18,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 fetch('assets/config/app.config.json')
                     .then(response => response.json())
                     .then(config => {
-
                         const options = {
-                            importsToExclude: [
-                              Ansyn.Modules.AnsynRouterModule,
-                              Ansyn.Modules.RouterModule
-                            ],
                             providers: [],
                             customModules: []
                         };
