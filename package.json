@@ -1,11 +1,18 @@
 {
-    "name": "ansyn-angular1",
-    "private": true,
-    "version": "0.0.0",
-    "description": "Ansyn as a component in an angular 1 app",
-    "repository": "https://github.com/ansyn/ansyn-angular1",
-    "license": "MIT",
-    "scripts": {
-        "start": "http-server -a localhost -p 8000 -c-1 ./app"
-    }
+  "name": "ansyn-angular1",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Ansyn as a component in an angular 1 app",
+  "repository": "https://github.com/ansyn/ansyn-angular1",
+  "license": "MIT",
+  "scripts": {
+    "build": "bash build.sh",
+    "start": "http-server -a localhost -p 8000 -c-1 ./app",
+    "predeploy": "npm run build && npm run CNAME",
+    "CNAME": "echo http://ansyn-angular1.webiks.com > app/CNAME",
+    "deploy": "gh-pages -d app"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.2.0"
+  }
 }

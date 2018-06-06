@@ -1,0 +1,7 @@
+*
+!.gitignore
+!.index.html
+!.app.css
+!.app.js
+!scripts/
+!/view1/*
