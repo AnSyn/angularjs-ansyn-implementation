@@ -24,39 +24,85 @@ angular.module('myApp.view1', ['ngRoute'])
                         };
 
                         const callback = ((api) => {
-                            ansynAPIS[id] = api
+                            ansynAPIS[id] = api;
                         });
 
-                        ansynBuilder = new Ansyn({ id, config, options, callback });
-                })
+                        ansynBuilder = new Ansyn({id, config, options, callback});
+                    })
             }
         };
 
         $scope.loadOverlay = function (id) {
             const overlay = {
-                'id': 'newId',
-                'footprint': {
-                    'type': 'MultiPolygon',
-                    'coordinates': [[[[-119.45464065703361, 34.221987731476354], [-117.49034101969485, 33.8435279581249], [-117.98337041613146, 32.120404101964624], [-119.90912780210559, 32.49869792584401], [-119.45464065703361, 34.221987731476354]]]]
-                },
-                'sensorType': 'Landsat8L1G',
-                'sensorName': 'Landsat8',
-                'bestResolution': 30,
-                'name': 'LC80410372018051LGN00',
-                'imageUrl': 'https://tiles.planet.com/data/v1/Landsat8L1G/LC80410372018051LGN00/{z}/{x}/{y}.png?api_key=9f7afec0ebfb4e1ca0bf959a0050545b',
-                'thumbnailUrl': 'https://api.planet.com/data/v1/item-types/Landsat8L1G/items/LC80410372018051LGN00/thumb?api_key=9f7afec0ebfb4e1ca0bf959a0050545b',
-                'date': new Date('2018-02-20T18:28:30.196Z'),
-                'photoTime': '2018-02-20T18:28:30.196489Z',
-                'azimuth': 0,
-                'sourceType': 'PLANET',
-                'isGeoRegistered': true
-            };
+                    "id": "S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438",
+                    "footprint": {
+                        "type": "MultiPolygon",
+                        "coordinates": [[[[-116.89444287520452, 33.89457226182276], [-116.89510325389628, 33.3513170774216], [-118.07511005827479, 33.34670729904315], [-118.08758328379399, 34.33683322524422], [-116.89388597356348, 34.34161747856573], [-116.89444287520452, 33.89457226182276]]]]
+                    },
+                    "sensorType": "Sentinel2L1C",
+                    "sensorName": "Sentinel-2A",
+                    "bestResolution": 10,
+                    "name": "S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438",
+                    "imageUrl": "https://tiles.planet.com/data/v1/Sentinel2L1C/S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438/{z}/{x}/{y}.png?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                    "thumbnailUrl": "https://api.planet.com/data/v1/item-types/Sentinel2L1C/items/S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438/thumb?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                    "date": new Date("2018-07-08T18:36:56.649Z"),
+                    "photoTime": "2018-07-08T18:36:56.649Z",
+                    "azimuth": 0.07103490055616922,
+                    "sourceType": "PLANET",
+                    "isGeoRegistered": true
+                }
+            ;
 
             ansynAPIS[id].displayOverLay(overlay)
-        }
+        };
+
+        $scope.setOverlays = function (id) {
+            const overlays = [
+                    {
+                        "id": "S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438",
+                        "footprint": {
+                            "type": "MultiPolygon",
+                            "coordinates": [[[[-116.89444287520452, 33.89457226182276], [-116.89510325389628, 33.3513170774216], [-118.07511005827479, 33.34670729904315], [-118.08758328379399, 34.33683322524422], [-116.89388597356348, 34.34161747856573], [-116.89444287520452, 33.89457226182276]]]]
+                        },
+                        "sensorType": "Sentinel2L1C",
+                        "sensorName": "Sentinel-2A",
+                        "bestResolution": 10,
+                        "name": "S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438",
+                        "imageUrl": "https://tiles.planet.com/data/v1/Sentinel2L1C/S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438/{z}/{x}/{y}.png?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                        "thumbnailUrl": "https://api.planet.com/data/v1/item-types/Sentinel2L1C/items/S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438/thumb?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                        "date": new Date("2018-07-08T18:36:56.649Z"),
+                        "photoTime": "2018-07-08T18:36:56.649Z",
+                        "azimuth": 0.07103490055616922,
+                        "sourceType": "PLANET",
+                        "isGeoRegistered": true
+                    },
+                    {
+                        "id": "S2A_MSIL1C_20180519T182921_N0206_R027_T11SMT_20180519T232423",
+                        "footprint": {
+                            "type": "MultiPolygon",
+                            "coordinates": [[[[-116.89442492347177, 33.909138052591665], [-116.89510325389628, 33.3513170774216], [-118.07511005827479, 33.34670729904315], [-118.08758328379399, 34.33683322524422], [-116.89388597356348, 34.34161747856573], [-116.89442492347177, 33.909138052591665]]]]
+                        },
+                        "sensorType": "Sentinel2L1C",
+                        "sensorName": "Sentinel-2A",
+                        "bestResolution": 10,
+                        "name": "S2A_MSIL1C_20180519T182921_N0206_R027_T11SMT_20180519T232423",
+                        "imageUrl": "https://tiles.planet.com/data/v1/Sentinel2L1C/S2A_MSIL1C_20180519T182921_N0206_R027_T11SMT_20180519T232423/{z}/{x}/{y}.png?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                        "thumbnailUrl": "https://api.planet.com/data/v1/item-types/Sentinel2L1C/items/S2A_MSIL1C_20180519T182921_N0206_R027_T11SMT_20180519T232423/thumb?api_key=98d4e5a377594e7b80f692d9d487ff26",
+                        "date": new Date("2018-05-19T18:43:52.538Z"),
+                        "photoTime": "2018-05-19T18:43:52.538Z",
+                        "azimuth": 0.07086036763096977,
+                        "sourceType": "PLANET",
+                        "isGeoRegistered": true
+                    }
+                ]
+            ;
+
+            ansynAPIS[id].setOverlays(overlays)
+        };
+
         $scope.changeMapLayout = function (id) {
             ansynAPIS[id].changeMapLayout('layout2')
-        }
+        };
         $scope.changeWindowLayout = function (id) {
             const windowLayout = {
                 menu: false,
@@ -66,19 +112,19 @@ angular.module('myApp.view1', ['ngRoute'])
                 toolsOverMenu: true
             };
             ansynAPIS[id].changeWindowLayout(windowLayout)
-        }
+        };
         $scope.getMapPosition = function (id) {
             ansynAPIS[id].mapPosition$.subscribe(position => {
-                    const pos = JSON.stringify(position.payload.position.projectedState.center);
-                $scope.position = pos
+                const pos = JSON.stringify(position.payload.position.projectedState.center);
+                $scope.position = pos;
                 console.log(position)
             })
 
-        }
+        };
         $scope.setMapPosition = function (id) {
             const position = [-117.89788973855977, 33.77329129691691];
             ansynAPIS[id].goToPosition(position)
-        }
+        };
         $scope.setMouseShadow = function (id) {
             const coords = [
                 [-117.89337288312173, 33.80392816773926],
@@ -94,19 +140,19 @@ angular.module('myApp.view1', ['ngRoute'])
                 [-117.90159778748237, 33.80804812952371],
                 [-117.90699355807357, 33.80901750346732]
 
-            ]
+            ];
             setInterval(() => {
                 ansynAPIS[id].setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
             }, 1000);
 
-        }
+        };
         $scope.getMouseShadow = function (id) {
             ansynAPIS[id].getShadowMouse(pointerMove$ => pointerMove$.subscribe(point => console.log(point)))
 
         }
 
 
-        }]);
+    }]);
 
 
 
