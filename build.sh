@@ -1,6 +1,7 @@
-set -e
+# pass your projects dir path as a parameter (e.g. /c/projects)
 
-ANSYN_ROOT=~/Desktop/Development/Columbus/ansyn/build/buildBundle
+PROJECTS_DIR=$1
+ANSYN_ROOT="$PROJECTS_DIR/Ansyn/build/buildBundle"
 cd $ANSYN_ROOT
 
 # build!
@@ -9,7 +10,7 @@ gulp createCdn
 
 # copy!
 
-cd ~/Desktop/Development/Columbus/ansyn-angular1
+cd "$PROJECTS_DIR/ansyn-angular1"
 cp $ANSYN_ROOT/deployNoZone/ansynNoZone.js ./app/scripts/
 cp $ANSYN_ROOT/dist/fontawesome* ./app
 cp $ANSYN_ROOT/dist/roboto* ./app
