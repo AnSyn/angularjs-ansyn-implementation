@@ -22,3 +22,4 @@ cp $ANSYN_ROOT/dist/fontawesome* ./app
 cp $ANSYN_ROOT/dist/roboto* ./app
 rm -rf ./app/assets
 cp -r $ANSYN_ROOT/dist/assets ./app/assets
+node scripts/edit-config
