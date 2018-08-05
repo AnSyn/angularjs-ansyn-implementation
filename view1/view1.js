@@ -16,16 +16,18 @@ angular.module('myApp.view1', ['ngRoute'])
         $scope.initAnsyn = function (id) {
             if (Ansyn) {
                 fetch('assets/config/app.config.json')
-                    .then(response => response.json())
-                    .then(config => {
+                    .then(function(response){
+                        return response.json();
+                    })
+                    .then(function(config) {
                         const options = {
                             providers: [],
                             customModules: []
                         };
 
-                        const callback = ((api) => {
+                        const callback = function(api) {
                             ansynAPIS[id] = api;
-                        });
+                        };
 
                         ansynBuilder = new Ansyn({id, config, options, callback});
                     })
@@ -114,7 +116,7 @@ angular.module('myApp.view1', ['ngRoute'])
             ansynAPIS[id].changeWindowLayout(windowLayout)
         };
         $scope.getMapPosition = function (id) {
-            ansynAPIS[id].mapPosition$.subscribe(position => {
+            ansynAPIS[id].mapPosition$.subscribe(function(position) {
                 const pos = JSON.stringify(position.payload.position.projectedState.center);
                 $scope.position = pos;
                 console.log(position)
@@ -141,14 +143,17 @@ angular.module('myApp.view1', ['ngRoute'])
                 [-117.90699355807357, 33.80901750346732]
 
             ];
-            setInterval(() => {
+            setInterval(function() {
                 ansynAPIS[id].setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
             }, 1000);
 
         };
         $scope.getMouseShadow = function (id) {
-            ansynAPIS[id].getShadowMouse(pointerMove$ => pointerMove$.subscribe(point => console.log(point)))
-
+            ansynAPIS[id].getShadowMouse(function(pointerMove$) {
+                return pointerMove$.subscribe(function(point) {
+                    console.log(point)
+                })
+            });
         }
 
 
