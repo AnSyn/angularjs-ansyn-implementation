@@ -12,24 +12,45 @@ angular.module('myApp.view1', ['ngRoute'])
 
     .controller('View1Ctrl', ['$scope', function ($scope) {
         let ansynBuilder;
-        let ansynAPIS = {};
+
+        $scope.maps = {
+          ansynMap: {
+            id: 'ansynMap',
+            class: 'success',
+            api: null
+          },
+          ansynMap2: {
+            id: 'ansynMap2',
+            class: 'primary',
+            api: null
+          }
+        };
+
         $scope.initAnsyn = function (id) {
+          let scope = $scope;
             if (Ansyn) {
                 fetch('assets/config/app.config.json')
-                    .then(response => response.json())
-                    .then(config => {
+                    .then(function(response){
+                        return response.json();
+                    })
+                    .then(function(config) {
                         const options = {
                             providers: [],
                             customModules: []
                         };
 
-                        const callback = ((api) => {
-                            ansynAPIS[id] = api;
-                        });
+                        const callback = function(api) {
+                          scope.onAnsynApiInit(id, api);
+                        };
 
                         ansynBuilder = new Ansyn({id, config, options, callback});
                     })
             }
+        };
+
+        $scope.onAnsynApiInit = function(id, api) {
+          $scope.maps[id].api = api;
+          $scope.$apply();
         };
 
         $scope.loadOverlay = function (id) {
@@ -53,7 +74,7 @@ angular.module('myApp.view1', ['ngRoute'])
                 }
             ;
 
-            ansynAPIS[id].displayOverLay(overlay)
+            $scope.maps[id].api.displayOverLay(overlay)
         };
 
         $scope.setOverlays = function (id) {
@@ -97,11 +118,11 @@ angular.module('myApp.view1', ['ngRoute'])
                 ]
             ;
 
-            ansynAPIS[id].setOverlays(overlays)
+            $scope.maps[id].api.setOverlays(overlays)
         };
 
         $scope.changeMapLayout = function (id) {
-            ansynAPIS[id].changeMapLayout('layout2')
+            $scope.maps[id].api.changeMapLayout('layout2')
         };
         $scope.changeWindowLayout = function (id) {
             const windowLayout = {
@@ -111,19 +132,16 @@ angular.module('myApp.view1', ['ngRoute'])
                 contextSun: true,
                 toolsOverMenu: true
             };
-            ansynAPIS[id].changeWindowLayout(windowLayout)
+            $scope.maps[id].api.changeWindowLayout(windowLayout)
         };
-        $scope.getMapPosition = function (id) {
-            ansynAPIS[id].mapPosition$.subscribe(position => {
-                const pos = JSON.stringify(position.payload.position.projectedState.center);
-                $scope.position = pos;
-                console.log(position)
-            })
 
+        $scope.getMapPosition = function (id) {
+          alert(JSON.stringify($scope.maps[id].api.getMapPosition().projectedState))
         };
+
         $scope.setMapPosition = function (id) {
             const position = [-117.89788973855977, 33.77329129691691];
-            ansynAPIS[id].goToPosition(position)
+            $scope.maps[id].api.goToPosition(position)
         };
         $scope.setMouseShadow = function (id) {
             const coords = [
@@ -141,14 +159,17 @@ angular.module('myApp.view1', ['ngRoute'])
                 [-117.90699355807357, 33.80901750346732]
 
             ];
-            setInterval(() => {
-                ansynAPIS[id].setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
+            setInterval(function() {
+                $scope.maps[id].api.setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
             }, 1000);
 
         };
         $scope.getMouseShadow = function (id) {
-            ansynAPIS[id].getShadowMouse(pointerMove$ => pointerMove$.subscribe(point => console.log(point)))
-
+            $scope.maps[id].api.getShadowMouse(function(pointerMove$) {
+                return pointerMove$.subscribe(function(point) {
+                    console.log(point)
+                })
+            });
         }
 
 
