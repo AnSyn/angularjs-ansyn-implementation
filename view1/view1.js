@@ -136,7 +136,7 @@ angular.module('myApp.view1', ['ngRoute'])
         };
 
         $scope.getMapPosition = function (id) {
-          alert(JSON.stringify($scope.maps[id].api.getMapPosition().projectedState))
+          console.log(JSON.stringify($scope.maps[id].api.getMapPosition()))
         };
 
         $scope.setMapPosition = function (id) {
