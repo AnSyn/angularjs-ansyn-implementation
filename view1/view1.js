@@ -77,7 +77,7 @@ angular.module('myApp.view1', ['ngRoute'])
             $scope.maps[id].api.displayOverLay(overlay)
         };
 
-        $scope.setOverlays = function (api) {
+        $scope.setOverlays = function (id) {
             const overlays = [
                     {
                         "id": "S2A_MSIL1C_20180708T182921_N0206_R027_T11SMT_20180708T221438",
@@ -118,13 +118,13 @@ angular.module('myApp.view1', ['ngRoute'])
                 ]
             ;
 
-            api.setOverlays(overlays)
+            $scope.maps[id].api.setOverlays(overlays)
         };
 
-        $scope.changeMapLayout = function (api) {
-            api.changeMapLayout('layout2')
+        $scope.changeMapLayout = function (id) {
+            $scope.maps[id].api.changeMapLayout('layout2')
         };
-        $scope.changeWindowLayout = function (api) {
+        $scope.changeWindowLayout = function (id) {
             const windowLayout = {
                 menu: false,
                 statusBar: true,
@@ -132,18 +132,18 @@ angular.module('myApp.view1', ['ngRoute'])
                 contextSun: true,
                 toolsOverMenu: true
             };
-            api.changeWindowLayout(windowLayout)
+            $scope.maps[id].api.changeWindowLayout(windowLayout)
         };
 
-        $scope.getMapPosition = function (api) {
-          console.log(JSON.stringify(api.getMapPosition()))
+        $scope.getMapPosition = function (id) {
+          console.log(JSON.stringify($scope.maps[id].api.getMapPosition()))
         };
 
-        $scope.setMapPosition = function (api) {
+        $scope.setMapPosition = function (id) {
             const position = [-117.89788973855977, 33.77329129691691];
-            api.goToPosition(position)
+            $scope.maps[id].api.goToPosition(position)
         };
-        $scope.setMouseShadow = function (api) {
+        $scope.setMouseShadow = function (id) {
             const coords = [
                 [-117.89337288312173, 33.80392816773926],
                 [-117.89308121984654, 33.803128387461086],
@@ -160,7 +160,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
             ];
             setInterval(function() {
-                api.setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
+                $scope.maps[id].api.setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
             }, 1000);
 
         };
@@ -172,9 +172,7 @@ angular.module('myApp.view1', ['ngRoute'])
             });
         }
 
-      $scope.destroy = function (api) {
-        api.destroy();
-      }
+
     }]);
 
 
