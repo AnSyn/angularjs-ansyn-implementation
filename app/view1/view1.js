@@ -165,11 +165,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
         };
         $scope.getMouseShadow = function (api) {
-            api.getShadowMouse(function(pointerMove$) {
-                return pointerMove$.subscribe(function(point) {
-                    console.log(point)
-                })
-            });
+            api.onShadowMouseProduce$.subscribe((coords) => console.log(coords));
         };
 
       $scope.destroy = function (map) {
