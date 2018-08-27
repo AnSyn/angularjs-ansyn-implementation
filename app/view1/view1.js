@@ -167,7 +167,7 @@ angular.module('myApp.view1', ['ngRoute'])
 
         };
 
-        $scope.stopShadowMouse = function (api) {
+        $scope.stopShadowMouse = function () {
             clearInterval(refreshIntervalId);
         };
 
