@@ -12,7 +12,6 @@ angular.module('myApp.view1', ['ngRoute'])
 
     .controller('View1Ctrl', ['$scope', function ($scope) {
         let ansynBuilder;
-        let refreshIntervalId;
 
         $scope.maps = {
           ansynMap: {
@@ -160,25 +159,20 @@ angular.module('myApp.view1', ['ngRoute'])
                 [-117.90699355807357, 33.80901750346732]
 
             ];
-
-            refreshIntervalId = setInterval(function() {
+            setInterval(function() {
                 api.setOutSourceMouseShadow(coords[Math.floor(Math.random() * 10)]);
             }, 1000);
 
         };
-
-        $scope.stopShadowMouse = function () {
-            clearInterval(refreshIntervalId);
-        };
-
-
         $scope.getMouseShadow = function (api) {
-            api.onShadowMouseProduce$.subscribe((coords) => console.log(coords));
+            api.getShadowMouse(function(pointerMove$) {
+                return pointerMove$.subscribe(function(point) {
+                    console.log(point)
+                })
+            });
         };
 
-
-
-        $scope.destroy = function (map) {
+      $scope.destroy = function (map) {
         map.api.destroy();
         map.api = null;
       }
