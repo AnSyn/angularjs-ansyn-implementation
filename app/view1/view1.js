@@ -34,16 +34,11 @@ angular.module('myApp.view1', ['ngRoute'])
                         return response.json();
                     })
                     .then(function(config) {
-                        const options = {
-                            providers: [],
-                            customModules: []
-                        };
-
                         const callback = function(api) {
                           scope.onAnsynApiInit(id, api);
                         };
 
-                        ansynBuilder = new Ansyn({id, config, options, callback});
+                        ansynBuilder = new Ansyn({id, config, callback});
                     })
             }
         };
