@@ -10,7 +10,8 @@
     "start": "http-server -a localhost -p 8000 -c-1 ./app",
     "predeploy": "npm run build && npm run CNAME",
     "CNAME": "echo http://ansyn-angular1.webiks.com > app/CNAME",
-    "deploy": "gh-pages -d app"
+    "deploy": "gh-pages -d app",
+    "log": "git log master --pretty=format:\\\"%an\\\",\\\"%ai\\\",\\\"%s\\\",\\\"%H\\\" > log.csv && echo Commiter, Date, Message, Hash | cat - log.csv > log2.csv && mv log2.csv log.csv"
   },
   "devDependencies": {
     "gh-pages": "^1.2.0"
